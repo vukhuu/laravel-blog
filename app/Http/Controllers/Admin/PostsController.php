@@ -9,6 +9,9 @@ use App\Repositories\PostRepositoryInterface;
 
 class PostsController extends Controller
 {
+    /**
+     * Page to create a blog post
+     */
     public function create()
     {
         $post = new Post();
@@ -16,6 +19,10 @@ class PostsController extends Controller
         return view('admin.posts.createOrUpdate', compact('post', 'isCreateNew'));
     }
 
+    /**
+     * Store a post via POST method
+     * @param bool $isPublished
+     */
     public function store($isPublished = 0)
     {
         request()->validate([
@@ -35,12 +42,21 @@ class PostsController extends Controller
         return redirect(url("/admin/posts/{$post->_id}/edit"))->with('message', $message);
     }
 
+    /**
+     * Load page to edit a post
+     * @param Post $post
+     */
     public function edit(Post $post)
     {
         $isCreateNew = false;
         return view('admin.posts.createOrUpdate', compact('post', 'isCreateNew'));
     }
 
+    /**
+     * Update a post via PUT request
+     * @param Post $post
+     * @param bool $isPublished
+     */
     public function update(Post $post, $isPublished = 0)
     {
         request()->validate([
@@ -56,12 +72,20 @@ class PostsController extends Controller
         return redirect(url("/admin/posts/{$post->_id}/edit"))->with('message', $message);
     }
 
+    /**
+     * Show all posts to admin
+     * @param PostRepositoryInterface $postRepository
+     */
     public function index(PostRepositoryInterface $postRepository)
     {
         $posts = $postRepository->findAll();
         return view('admin.posts.index', compact('posts'));
     }
 
+    /**
+     * Delete a post
+     * @param Post $post
+     */
     public function delete(Post $post)
     {
         $post->delete();
