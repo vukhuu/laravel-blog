@@ -6,6 +6,9 @@ use App\Post;
 
 class MongodbPostRepository implements PostRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function findAll()
     {
         $posts = DB::connection('mongodb')
@@ -16,6 +19,9 @@ class MongodbPostRepository implements PostRepositoryInterface
         return $posts;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function findAllPublishedPosts()
     {
         $posts = DB::connection('mongodb')

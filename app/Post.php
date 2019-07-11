@@ -19,6 +19,9 @@ class Post extends Model
 
     protected $dates = ['published_at'];
 
+    /**
+     * Attributes of post collection
+     */
     protected $attributes = [
         'title' => '',
         'slug' => '',
@@ -32,12 +35,20 @@ class Post extends Model
         'created_at' => null,
     ];
 
+    /**
+     * Generate slug when saving title
+     * @param mixed $value
+     */
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = trim($value);
         $this->attributes['slug'] = Str::slug($this->attributes['title'], '-');
     }
 
+    /**
+     * Publish a post
+     * @return bool
+     */
     public function publish()
     {
         $this->attributes['is_published'] = self::IS_PUBLISHED_YES;
@@ -45,6 +56,10 @@ class Post extends Model
         return $this->save();
     }
 
+    /**
+     * Soft delete a post
+     * @return bool
+     */
     public function delete()
     {
         $this->is_deleted = self::IS_DELETED_YES;
