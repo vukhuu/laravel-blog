@@ -1,6 +1,10 @@
 ## About
 This is a simple blog implemented using Laravel 5.6 backed by Mongodb for storing blog posts, and Mysql for storing users (default Laravel's authentication)
 
+## Features
+- Guests can view all posts
+- Admin can create/update/delete/publish posts
+
 ## Installation
 Run `docker-compose up`
 
