@@ -3,26 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Repositories\PostRepositoryInterface;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function index(PostRepositoryInterface $postRepository)
     {
-        $this->middleware('auth');
+        $posts = $postRepository->findAllPublishedPosts();
+        return view('home.index', compact('posts'));
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function view(Post $post)
     {
-        return view('home');
+        return view('home.view', compact('post'));
     }
 }

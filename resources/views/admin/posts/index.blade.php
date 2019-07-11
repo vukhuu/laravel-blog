@@ -20,7 +20,7 @@
         <tr>
             <td><input type="checkbox" name="id" value="{{ $post['_id'] }}"></td>
             @if ($post['is_published'])
-                <td><a href='#' title='{{ __("messages.clickToView") }}'>{{ $post['title'] }}</a></td>
+                <td><a target="_blank" href='{{ url("/view/" . $post["_id"]) }}' title='{{ __("messages.clickToView") }}'>{{ $post['title'] }}</a></td>
             @else
                 <td>{{ $post['title'] }}</td>
             @endif

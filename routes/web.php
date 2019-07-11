@@ -23,8 +23,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/admin/posts/{post}', 'Admin\PostsController@delete');
 });
 
-Auth::routes();
+Route::group([], function() {
+    Route::get('/', 'HomeController@index');
+    Route::get('/view/{post}', 'HomeController@view');
+});
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
